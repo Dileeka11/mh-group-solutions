@@ -35,13 +35,22 @@ const AnimatedCounter = ({ end, duration = 2, suffix = "", label }: AnimatedCoun
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="text-center"
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="text-center relative group"
     >
-      <div className="text-4xl md:text-5xl font-heading font-bold text-primary">
-        {count}{suffix}
+      {/* Glow ring behind */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-24 h-24 rounded-full bg-primary/10 blur-xl group-hover:bg-primary/20 transition-all duration-500" />
       </div>
-      <div className="text-muted-foreground mt-2 text-sm font-medium">{label}</div>
+
+      <div className="relative">
+        <div className="text-4xl md:text-5xl font-heading font-bold text-gradient-emerald">
+          {count}{suffix}
+        </div>
+        <div className="text-white/50 mt-2 text-sm font-medium tracking-wide uppercase">
+          {label}
+        </div>
+      </div>
     </motion.div>
   );
 };
